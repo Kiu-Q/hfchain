@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>13</p>
+<p>14</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -74,10 +74,10 @@ if (cStatus === "invalid"){
 };
 console.log("Valid checked");
 }
-function useC(){
+function useC(text){
   console.log("Clicked");
   const db = getDatabase();
-  set(ref(db, `coupon/${decodedText}/status`), "invalid");
+  set(ref(db, `coupon/${text}/status`), "invalid");
   console.log("Coupon invalided");
 };
 
@@ -87,7 +87,7 @@ function onScanSuccess(decodedText, decodedResult) {
   console.log(`Scan result: ${decodedText}`, decodedResult);
   checkShop(decodedText);
   checkValid(decodedText);
-  use.addEventListener("click",useC);
+  use.addEventListener("click",useC(decodedText));
 }
 function reload(){
   window.location.reload();
