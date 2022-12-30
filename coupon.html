@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>9</p>
+<p>10</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -95,7 +95,8 @@ function scan(){
   var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
   html5QrcodeScanner.render(onScanSuccess);
 };
-  scan();
+  var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess);
   getShop();
   document.getElementById("another").addEventListener("click",scan);
 </script>
