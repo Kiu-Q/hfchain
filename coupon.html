@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>3</p>
+<p>4</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -22,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const database = getDatabase(app);
 const dbRef = ref(getDatabase());
-var alert, shop, use;
+var alert, shop, use, cShop, cStatus;
 function getShop(){
   if (localStorage.getItem("shop") == null){
     shop = window.prompt("Enter which shop your are:");
@@ -41,13 +41,11 @@ function createUseBtn(){
 function checkShop(text){
   get(child(dbRef,`coupon/${text}/issueshop`)).then((snapshot) => {
   if (snapshot.exists()) {
-    const cShop = snapshot.val();
+    cShop = snapshot.val();
     console.log(cShop);
   } else {
     console.log("No data available");
   };
-}).catch((error) => {
-  console.error(error);
 });
 if (shop == cShop){
   alert = document.createElement("p");
@@ -62,13 +60,11 @@ console.log("Shop checked");
 function checkValid(text){
   get(child(dbRef,`coupon/${text}/ststus`)).then((snapshot) => {
   if (snapshot.exists()) {
-    const cStatus = snapshot.val()
+    cStatus = snapshot.val()
     console.log(cStatus);
   } else {
     console.log("No data available");
   };
-}).catch((error) => {
-  console.error(error);
 });
 if (cStatus == "invalid"){
   alert = document.createElement("p");
