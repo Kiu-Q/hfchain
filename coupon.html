@@ -60,7 +60,7 @@ console.log("Shop checked");
 function checkValid(text){
   get(child(dbRef,`coupon/${text}/ststus`)).then((snapshot) => {
   if (snapshot.exists()) {
-    cStatus = snapshot.val()
+    cStatus = snapshot.val();
     console.log(cStatus);
   } else {
     console.log("No data available");
@@ -83,14 +83,14 @@ function useC(){
 
 function onScanSuccess(decodedText, decodedResult) {
   html5QrcodeScanner.clear();
-  createUseBtn()
+  createUseBtn();
   console.log(`Scan result: ${decodedText}`, decodedResult);
   checkShop(decodedText);
   checkValid(decodedText);
   use.addEventListener("click",useC);
 }
 function reload(){
-  window.location.reload()
+  window.location.reload();
 }
   var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
   html5QrcodeScanner.render(onScanSuccess);
