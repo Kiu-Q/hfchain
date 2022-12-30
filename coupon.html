@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>14</p>
+<p>15</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -22,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const database = getDatabase(app);
 const dbRef = ref(getDatabase());
-var alert, shop, use, cShop, cStatus;
+var alert, shop, use, cShop, cStatus, cText;
 function getShop(){
   if (localStorage.getItem("shop") == null){
     shop = window.prompt("Enter which shop your are:");
@@ -67,17 +67,18 @@ function checkValid(text){
   };
 });
 if (cStatus === "invalid"){
-  window.alert("Coupon invalid - used coupon")
+  window.alert("Coupon invalid - used coupon");
     console.log("Alert created");
     use.style.visibility = "hidden";
     console.log("Btn hide");
 };
 console.log("Valid checked");
 }
-function useC(text){
+function useC(){
   console.log("Clicked");
   const db = getDatabase();
-  set(ref(db, `coupon/${text}/status`), "invalid");
+  set(ref(db, `coupon/${cText}/status`), "invalid");
+  window.alert("Coupon used")
   console.log("Coupon invalided");
 };
 
@@ -87,7 +88,8 @@ function onScanSuccess(decodedText, decodedResult) {
   console.log(`Scan result: ${decodedText}`, decodedResult);
   checkShop(decodedText);
   checkValid(decodedText);
-  use.addEventListener("click",useC(decodedText));
+  cText = decodedText;
+  use.addEventListener("click",useC);
 }
 function reload(){
   window.location.reload();
