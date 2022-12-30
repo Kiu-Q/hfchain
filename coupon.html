@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>12</p>
+<p>13</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -46,6 +46,7 @@ function checkShop(text){
     console.log(`Coupon shop: ${cShop}`);
     console.log(`Local shop: ${shop}`);
     if (shop === cShop){
+      window.alert("Coupon invalid - same issue and use shop")
       console.log("Alert created");
       use.style.visibility = "hidden";
       console.log("Btn hide");
@@ -66,12 +67,10 @@ function checkValid(text){
   };
 });
 if (cStatus === "invalid"){
-  alert = document.createElement("p");
-  alert.innerText("This coupon is in valid");
-  document.body.appendChild(alert);
-  console.log("Alert created");
-  use.style.visibility = "hidden";
-  console.log("Btn hide");
+  window.alert("Coupon invalid - used coupon")
+    console.log("Alert created");
+    use.style.visibility = "hidden";
+    console.log("Btn hide");
 };
 console.log("Valid checked");
 }
@@ -90,16 +89,13 @@ function onScanSuccess(decodedText, decodedResult) {
   checkValid(decodedText);
   use.addEventListener("click",useC);
 }
-function scan(){
-  var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
-  html5QrcodeScanner.render(onScanSuccess);
-  use.style.visibility = "hidden";
-  console.log("Btn hide");
-};
+function reload(){
+  window.location.reload()
+}
   var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
   html5QrcodeScanner.render(onScanSuccess);
   getShop();
-  document.getElementById("another").addEventListener("click",scan);
+  document.getElementById("another").addEventListener("click",reload);
 </script>
 <button id="another">Scan another coupon</button>
 </body>
