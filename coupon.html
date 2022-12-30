@@ -2,7 +2,6 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>17</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -82,6 +81,7 @@ function useC(){
   console.log("Coupon invalided");
   use.style.visibility = "hidden";
     console.log("Btn hide");
+    reload()
 };
 
 function onScanSuccess(decodedText, decodedResult) {
