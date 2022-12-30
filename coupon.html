@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>2</p>
+<p>3</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -35,7 +35,8 @@ function getShop(){
 function createUseBtn(){
   use = document.createElement('button');
   use.innerText = 'Use this coupon';
-  console.log("Btn created")
+  document.body.appendChild(use);
+  console.log("Btn created");
 }
 function checkShop(text){
   get(child(dbRef,`coupon/${text}/issueshop`)).then((snapshot) => {
@@ -51,6 +52,7 @@ function checkShop(text){
 if (shop == cShop){
   alert = document.createElement("p");
   alert.innerText("Cannot use coupon issue at same shop");
+  document.body.appendChild(alert);
   console.log("Alert created");
   use.style.visibility = "hidden";
   console.log("Btn hide");
@@ -71,6 +73,7 @@ function checkValid(text){
 if (cStatus == "invalid"){
   alert = document.createElement("p");
   alert.innerText("This coupon is in valid");
+  document.body.appendChild(alert);
   console.log("Alert created");
   use.style.visibility = "hidden";
   console.log("Btn hide");
