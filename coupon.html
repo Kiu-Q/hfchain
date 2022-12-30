@@ -2,13 +2,13 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>1</p>
+<p>2</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
-  import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
-  const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCxqopzTrDNfFDS1e_Jpr5fnL0nmJn1Wvw",
     authDomain: "hf-chain.firebaseapp.com",
     databaseURL: "https://hf-chain-default-rtdb.firebaseio.com",
@@ -18,25 +18,27 @@
     appId: "1:897232334716:web:45b611f79c4caca1387ef9",
     measurementId: "G-CXV715K427"
   };
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const database = getDatabase(app);
-  const dbRef = ref(getDatabase());
-  var alert;
-  /**/
-var shop;
-if (localStorage.getItem("shop") == null){
-shop = window.prompt("Enter which shop your are:");
-localStorage.setItem("shop",shop);
-}else{
-  shop = localStorage.getItem("shop");
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database = getDatabase(app);
+const dbRef = ref(getDatabase());
+var alert, shop, use;
+function getShop(){
+  if (localStorage.getItem("shop") == null){
+    shop = window.prompt("Enter which shop your are:");
+    localStorage.setItem("shop",shop);
+  }else{
+    shop = localStorage.getItem("shop");
+  }
+  console.log("Get local shop name")
 }
-function onScanSuccess(decodedText, decodedResult) {
-console.log(`Scan result: ${decodedText}`, decodedResult);
-const use = document.createElement('button');
-
-use.innerText = 'Use this coupon';
-get(child(dbRef,`coupon/${decodedText}/issueshop`)).then((snapshot) => {
+function createUseBtn(){
+  use = document.createElement('button');
+  use.innerText = 'Use this coupon';
+  console.log("Btn created")
+}
+function checkShop(text){
+  get(child(dbRef,`coupon/${text}/issueshop`)).then((snapshot) => {
   if (snapshot.exists()) {
     const cShop = snapshot.val();
     console.log(cShop);
@@ -49,9 +51,14 @@ get(child(dbRef,`coupon/${decodedText}/issueshop`)).then((snapshot) => {
 if (shop == cShop){
   alert = document.createElement("p");
   alert.innerText("Cannot use coupon issue at same shop");
+  console.log("Alert created");
   use.style.visibility = "hidden";
+  console.log("Btn hide");
 };
-get(child(dbRef,`coupon/${decodedText}/ststus`)).then((snapshot) => {
+console.log("Shop checked");
+}
+function checkValid(text){
+  get(child(dbRef,`coupon/${text}/ststus`)).then((snapshot) => {
   if (snapshot.exists()) {
     const cStatus = snapshot.val()
     console.log(cStatus);
@@ -64,18 +71,28 @@ get(child(dbRef,`coupon/${decodedText}/ststus`)).then((snapshot) => {
 if (cStatus == "invalid"){
   alert = document.createElement("p");
   alert.innerText("This coupon is in valid");
+  console.log("Alert created");
   use.style.visibility = "hidden";
+  console.log("Btn hide");
 };
+console.log("Valid checked");
+}
 function useC(){
+  console.log("Clicked");
   const db = getDatabase();
   set(ref(db, `coupon/${decodedText}/status`), "invalid");
+  console.log("Coupon invalided");
 };
-use.addEventListener("click",useC);
 
+function onScanSuccess(decodedText, decodedResult) {
+  createUseBtn()
+  console.log(`Scan result: ${decodedText}`, decodedResult);
+  checkShop(decodedText);
+  checkValid(decodedText);
+  use.addEventListener("click",useC);
 }
-var html5QrcodeScanner = new Html5QrcodeScanner(
-"reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess);
+  var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess);
 
 </script>
 </body>
