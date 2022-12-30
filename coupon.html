@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>8</p>
+<p>9</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -45,8 +45,7 @@ function checkShop(text){
     cShop = snapshot.val();
     console.log(cShop);
     if (shop === cShop){
-      alert = document.createElement("p");
-      alert.innerText("Cannot use coupon issue at same shop");
+      body.innerText("Cannot use coupon issue at same shop");
       document.body.appendChild(alert);
       console.log("Alert created");
       use.style.visibility = "hidden";
