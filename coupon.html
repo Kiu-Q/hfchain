@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>16</p>
+<p>17</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -80,6 +80,8 @@ function useC(){
   set(ref(db, `coupon/${cText}/status`), "invalid");
   window.alert("Coupon used")
   console.log("Coupon invalided");
+  use.style.visibility = "hidden";
+    console.log("Btn hide");
 };
 
 function onScanSuccess(decodedText, decodedResult) {
