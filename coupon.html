@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>10</p>
+<p>11</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -43,10 +43,9 @@ function checkShop(text){
   get(child(dbRef,`coupon/${text}/issueshop`)).then((snapshot) => {
   if (snapshot.exists()) {
     cShop = snapshot.val();
-    console.log(cShop);
+    console.log(`Coupon shop: ${cShop}`);
+    console.log(`Local shop: ${shop}`);
     if (shop === cShop){
-      body.innerText("Cannot use coupon issue at same shop");
-      document.body.appendChild(alert);
       console.log("Alert created");
       use.style.visibility = "hidden";
       console.log("Btn hide");
