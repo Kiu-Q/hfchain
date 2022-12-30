@@ -62,16 +62,16 @@ function checkValid(text){
   if (snapshot.exists()) {
     cStatus = snapshot.val();
     console.log(cStatus);
-  } else {
-    console.log("No data available");
-  };
-});
-if (cStatus === "invalid"){
+    if (cStatus === "invalid"){
   window.alert("Coupon invalid - used coupon");
     console.log("Alert created");
     use.style.visibility = "hidden";
     console.log("Btn hide");
 };
+  } else {
+    console.log("No data available");
+  };
+});
 console.log("Valid checked");
 }
 function useC(){
