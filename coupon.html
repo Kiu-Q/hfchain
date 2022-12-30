@@ -38,10 +38,10 @@ use.innerText = 'Use this coupon';
 get(child(dbRef,`coupon/${decodedText}/issueshop`)).then((snapshot) => {
   if (snapshot.exists()) {
     const cShop = snapshot.val();
-    console.log(snapshot.val());
+    console.log(cShop);
   } else {
     console.log("No data available");
-  }
+  };
 }).catch((error) => {
   console.error(error);
 });
@@ -49,14 +49,14 @@ if (shop == cShop){
   alert = document.createElement("p");
   alert.innerText("Cannot use coupon issue at same shop");
   use.style.visibility = "hidden";
-}
+};
 get(child(dbRef,`coupon/${decodedText}/ststus`)).then((snapshot) => {
   if (snapshot.exists()) {
     const cStatus = snapshot.val()
-    console.log(snapshot.val());
+    console.log(cStatus);
   } else {
     console.log("No data available");
-  }
+  };
 }).catch((error) => {
   console.error(error);
 });
