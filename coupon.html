@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>5</p>
+<p>6</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -30,7 +30,8 @@ function getShop(){
   }else{
     shop = localStorage.getItem("shop");
   }
-  console.log("Get local shop name")
+  console.log("Get local shop name");
+  console.log(`Shop name: ${shop}`);
 }
 function createUseBtn(){
   use = document.createElement('button');
