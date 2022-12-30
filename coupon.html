@@ -96,10 +96,17 @@ function onScanSuccess(decodedText, decodedResult) {
 function reload(){
   window.location.reload();
 }
+function change(){
+  shop = window.prompt("Enter which shop your are:");
+    localStorage.setItem("shop",shop);
+}
   var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
   html5QrcodeScanner.render(onScanSuccess);
   getShop();
   document.getElementById("another").addEventListener("click",reload);
+  document.getElementById("changeS").addEventListener("click",change);
+
 </script>
 <button id="another">Scan another coupon</button>
+<button id="changeS">Change shop</button>
 </body>
