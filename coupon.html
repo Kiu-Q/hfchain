@@ -92,9 +92,13 @@ function onScanSuccess(decodedText, decodedResult) {
   checkValid(decodedText);
   use.addEventListener("click",useC);
 }
-  getShop()
+function scan(){
   var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
   html5QrcodeScanner.render(onScanSuccess);
-
+};
+  scan();
+  getShop();
+  document.getElementById("another").addEventListener("click",scan);
 </script>
+<button id="another">Scan another coupon</button>
 </body>
