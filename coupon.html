@@ -2,7 +2,7 @@
 <head></head>
 <body>
 <div style="width: 500px" id="reader"></div>
-<p>6</p>
+<p>7</p>
 <script src="html5-qrcode.min.js"></script>
 <script type="module">
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -48,7 +48,7 @@ function checkShop(text){
     console.log("No data available");
   };
 });
-if (shop == cShop){
+if (shop === cShop){
   alert = document.createElement("p");
   alert.innerText("Cannot use coupon issue at same shop");
   document.body.appendChild(alert);
@@ -67,7 +67,7 @@ function checkValid(text){
     console.log("No data available");
   };
 });
-if (cStatus == "invalid"){
+if (cStatus === "invalid"){
   alert = document.createElement("p");
   alert.innerText("This coupon is in valid");
   document.body.appendChild(alert);
