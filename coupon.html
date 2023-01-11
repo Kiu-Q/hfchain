@@ -52,6 +52,10 @@ function checkShop(text){
     }
   } else {
     console.log("No data available");
+    window.alert("Coupon invalid - no this coupon");
+  console.log("Alert created");
+    use.style.visibility = "hidden";
+    console.log("Btn hide");
   };
 });
 console.log("Shop checked");
@@ -69,10 +73,6 @@ function checkValid(text){
 };
   } else {
     console.log("No data available");
-  window.alert("Coupon invalid - no this coupon");
-  console.log("Alert created");
-    use.style.visibility = "hidden";
-    console.log("Btn hide");
   };
 });
 console.log("Valid checked");
@@ -112,5 +112,5 @@ function change(){
 
 </script>
 <button id="another">Scan another coupon</button>
-<button id="changeS">Change shop</button>
+<button id="changeS">Change shop</button>V3.2
 </body>
